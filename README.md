@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 12301
 
 > A Vue.js project
@@ -20,6 +19,3 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-=======
-# 12301
->>>>>>> 47f64fe5bdd9e19c68221823823e5097bff676fe
