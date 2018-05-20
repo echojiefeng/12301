@@ -3,17 +3,16 @@
     <router-view/>
     <m-tabbar v-model="select">
       <m-tabbar-item id='main' >
-        <img src="../assets/logo.png" alt="" slot="icon-normal" @click="goSub('main')">
-        <img src="../assets/logo.png" alt="" slot="icon-active" @click="goSub('main')">
+        <img src="../assets/home/icon_tabBar_recommend_normal.png" alt="" slot="icon-normal" @click="goSub('main')">
+        <img src="../assets/home/icon_tabBar_recommend_pressed.png" alt="" slot="icon-active" @click="goSub('main')">
         <a @click="goSub('main')">推荐</a>
       </m-tabbar-item>
       <m-tabbar-item id='user'>
-        <img src="../assets/logo.png" alt="" slot="icon-normal" @click="goSub('destination')">
-        <img src="../assets/logo.png" alt="" slot="icon-active" @click="goSub('destination')">
+        <img src="../assets/home/icon_tabBar_destination_normal.png" alt="" slot="icon-normal" @click="goSub('destination')">
+        <img src="../assets/home/icon_tabBar_destination_pressed.png" alt="" slot="icon-active" @click="goSub('destination')">
         <a @click="goSub('destination')">目的地</a>
       </m-tabbar-item>
     </m-tabbar>
-   <div>123</div>
   </div>
 </template>
 
