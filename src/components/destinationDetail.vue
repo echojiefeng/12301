@@ -20,6 +20,18 @@
       <div class="right">
       </div>
     </div>
+    <div class="message">
+      <div class="introduce">三亚千古情景区掩映在茂密的原始森林和鲜花丛中，有大型歌舞《三亚千古情》、南海女神广场、图腾大道、崖州古城爱情谷、科技游乐馆、黎村、苗寨、清明上河图，...</div>
+      <div class="ticket">
+        <div class="title">门票</div>
+        <div class="content">贵宾成人门市价280元/人，网络销售价250元/人。豪华席580元/人。</div>
+      </div>
+      <div class="ticket">
+        <div class="title">地址</div>
+        <div class="content">海南省三亚市迎宾路333号</div>
+      </div>
+      <div></div>
+    </div>
     <!--旅行商城-->
     <div class="itemTitle">
       <div class="left">
@@ -29,6 +41,16 @@
         <a>
           <span>查看更多折扣</span><img src="../assets/home/icon_arrow_more.png">
         </a>
+      </div>
+    </div>
+    <div class="shop">
+      <div class="img"></div>
+      <div class="txt">
+        <div class="title">三亚3天2夜纯玩套餐</div>
+        <div class="price">
+          <div class="left">¥999.00</div>
+          <div class="right">已售2011件</div>
+        </div>
       </div>
     </div>
     <!--点评-->
@@ -42,6 +64,17 @@
         </a>
       </div>
     </div>
+    <div class="comment">
+      <div class="title">
+        <div class="img"></div>
+        <div class="txt">
+          <div class="left">海外游客</div>
+          <div class="right">2018年4月15日</div>
+        </div>
+      </div>
+      <div class="content">千古情景区是来三亚必到的经典景区。同天涯海角一样，来到三亚不去三亚千古情景区也会遗憾的！整个景区叫三亚宋城旅游区，里面包含四个景区：三亚千古情景区、三亚宋...</div>
+    </div>
+    <!--相关游记-->
     <div class="itemTitle">
       <div class="left">
         <p>相关游记</p>
@@ -50,6 +83,14 @@
         <a>
           <span>搜索更多相关游记</span><img src="../assets/home/icon_arrow_more.png">
         </a>
+      </div>
+    </div>
+    <div class="travels">
+      <div class="title">相关游记标题</div>
+      <div class="content">千古情景区是来三亚必到的经典景区。同天涯海角一样，来到三亚不去三亚千古情景区也会遗憾的！整个景区叫三亚宋城旅游区，里面包含四个景区：三亚千古情景区、三亚宋...</div>
+      <div class="user">
+        <div class="img"></div>
+        <div class="name">海外游客</div>
       </div>
     </div>
     <div class="blankSpace"></div>
@@ -191,6 +232,161 @@
             vertical-align: middle;
             margin-left: .11rem;
           }
+        }
+      }
+    }
+    .message{
+      box-shadow:.04rem 0 .15rem rgba(143,166,204,0.2);
+      background-color: #fff;
+      margin: .3rem .3rem 0 .3rem;
+      padding: .38rem .35rem;
+      font-size:.24rem;
+      font-family:PingFangSC-Regular;
+      color:rgba(153,153,153,1);
+      .introduce{
+        font-size:.24rem;
+        font-family:PingFangSC-Regular;
+        color:rgba(153,153,153,1);
+      }
+      .ticket{
+        display: flex;
+        .title{
+          margin-top: .3rem;
+          font-size:.28rem;
+          font-family:PingFangSC-Regular;
+          color:rgba(51,51,51,1);
+          width: 1rem;
+        }
+        .content{
+          margin-top: .3rem;
+          flex:1;
+          text-align: left;
+        }
+      }
+    }
+    .shop{
+      box-shadow:.04rem 0 .15rem rgba(143,166,204,0.2);
+      border-radius: .08rem;
+      background-color: #fff;
+      margin: .3rem .3rem 0 .3rem;
+      padding: .2rem;
+      font-size:.24rem;
+      font-family:PingFangSC-Regular;
+      color:rgba(153,153,153,1);
+      display: flex;
+      .img{
+        width: 1.6rem;
+        height: 1.6rem;
+        background-image: url('../assets/sample/img_recommend_subject1.png');
+        background-Repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      .txt{
+        margin-left: .3rem;
+        width: 4.5rem;
+        .title{
+          text-align: left;
+          font-size:.28rem;
+          font-family:PingFangSC-Regular;
+          color:rgba(51,51,51,1);
+        }
+        .price{
+          display: flex;
+          margin-top: .86rem;
+          .left{
+            flex: 1;
+            text-align: left;
+            font-size:.28rem;
+            font-family:SFUIDisplay-Regular;
+            color:rgba(255,136,48,1);
+          }
+          .right{
+            flex: 1;
+            text-align: right;
+          }
+        }
+      }
+    }
+    .comment{
+      box-shadow:.04rem 0 .15rem rgba(143,166,204,0.2);
+      border-radius: .08rem;
+      background-color: #fff;
+      margin: .3rem .3rem 0 .3rem;
+      padding: .38rem .35rem;
+      font-size:.24rem;
+      font-family:PingFangSC-Regular;
+      color:rgba(153,153,153,1);
+      .title{
+        display: flex;
+        .img{
+          width: .68rem;
+          height: .68rem;
+          border-radius: .34rem;
+          background-image: url('../assets/sample/img_recommend_subject1.png');
+          background-Repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+        .txt{
+          flex: 1;
+          display: flex;
+          line-height: .68rem;
+          .left{
+            margin-left: .26rem;
+            flex: 1;
+            text-align: left;
+            font-size:.28rem;
+            font-family:PingFangSC-Regular;
+            color:rgba(51,51,51,1);
+          }
+          .right{
+            flex: 1;
+            text-align: right;
+          }
+        }
+      }
+      .content{
+        text-align: left;
+        margin-top: .2rem;
+      }
+    }
+    .travels{
+      box-shadow:.04rem 0 .15rem rgba(143,166,204,0.2);
+      border-radius: .08rem;
+      background-color: #fff;
+      margin: .3rem .3rem 0 .3rem;
+      padding: .38rem .35rem;
+      font-size:.24rem;
+      font-family:PingFangSC-Regular;
+      color:rgba(153,153,153,1);
+      text-align: left;
+      .title{
+        font-size:.32rem;
+        font-family:PingFangSC-Semibold;
+        color:rgba(51,51,51,1);
+        font-weight: bold;
+      }
+      .content{
+        font-size:.24rem;
+        font-family:PingFangSC-Regular;
+        color:rgba(51,51,51,1);
+        margin: .3rem 0;
+      }
+      .user{
+        display: flex;
+        .img{
+          width: .5rem;
+          height: .5rem;
+          border-radius: .25rem;
+          background-image: url('../assets/sample/img_recommend_subject1.png');
+          background-Repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+        .name{
+          line-height: .5rem;
+          margin-left: .2rem;
         }
       }
     }
