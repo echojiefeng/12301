@@ -1,7 +1,7 @@
 <template>
   <!--推荐主页-->
   <div class="main">
-      <div class="topimg"></div>
+      <div class="topimg" :style="{ 'background-image' : banner }"></div>
       <div class="search"><img src="../assets/home/icon_searchBar_search.png"><input type="text" placeholder="搜一搜"></div>
       <!--精选专题-->
       <div class="itemTitle">
@@ -16,34 +16,31 @@
       </div>
       <div class="itemT">
         <div class="itemTBody">
-          <div class="itemTImg"><p>玩遍三亚</p></div>
-          <p class="itemTxt">玩遍全三亚主会
-            场分会场</p>
+          <div class="itemTImg" :style="{ 'background-image' : goodData[0].image}"><p>玩遍三亚</p></div>
+          <p class="itemTxt">{{goodData[0].title}}</p>
         </div>
         <div class="itemTBody">
-          <div class="itemTImg"><p>玩遍三亚</p></div>
-          <p class="itemTxt">玩遍全三亚主会
-            场分会场</p>
+          <div class="itemTImg" :style="{ 'background-image' : goodData[1].image}"><p>玩遍三亚</p></div>
+          <p class="itemTxt">{{goodData[1].title}}</p>
         </div>
         <div class="itemTBody">
-          <div class="itemTImg"><p>玩遍三亚</p></div>
-          <p class="itemTxt">玩遍全三亚主会
-            场分会场</p>
+          <div class="itemTImg" :style="{ 'background-image' : goodData[2].image}"><p>玩遍三亚</p></div>
+          <p class="itemTxt">{{goodData[2].title}}</p>
         </div>
       </div>
       <!--分类-->
       <div class="tabbar">
         <div class="item">全部</div>
-        <div class="item">游记</div>
-        <div class="item">商城</div>
-        <div class="item">问答</div>
-        <div class="item">干货</div>
+        <div class="item" @click="getStrategy(1)">游记</div>
+        <div class="item" @click="getStrategy(2)">商城</div>
+        <div class="item" @click="getStrategy(3)">问答</div>
+        <div class="item" @click="getStrategy(4)">干货</div>
       </div>
       <div class="itemO">
-        <div class="img"></div>
+        <div class="img" :style="{ 'background-image' : Article[0].image}"></div>
         <div class="txt">
-          <p class="title">带父母和小孩来三亚，合适么？</p>
-          <p>美食、美景、友善、好客、高效、服务好，就是对三亚的第一印象</p>
+          <p class="title">{{Article[0].title}}</p>
+          <p>{{Article[0].abstract}}</p>
         </div>
       </div>
       <!--限时立减-->
@@ -79,18 +76,73 @@
 export default {
 //  name: 'main',
   created () {
-    this.test()
+    this.getBanner();
+    this.goodChose();
+    this.getStrategy(1)
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      banner: '',
+      goodData: [
+        {
+          image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
+          title:"测试"
+        },
+        {
+          image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
+          title:"测试"
+        },
+        {
+          image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
+          title:"测试"
+        },
+      ],
+      Article: [
+        {
+          abstract: "暂无",
+          image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
+          title:'暂无'
+        }
+      ]
     }
   },
   methods: {
-    test(){
-      req.get('mock')
+    getBanner(){
+//      req.get('mock')
+      let vm = this;
+      req.get('/banner')
         .then(function (response) {
-          console.log(response.data);
+          vm.banner = "url("+response.data.data.image+")";
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+    goodChose(){
+      let vm = this;
+      req.get('/select_title')
+        .then(function (response) {
+          vm.goodData = response.data.data;
+          for(let i=0;i<vm.goodData.length;i++){
+            vm.goodData[i].image= "url("+vm.goodData[i].image+")";
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+    getStrategy(val){
+      let vm = this;
+      req.get('/travel', {params: {
+        type: val
+      }})
+        .then(function (response) {
+          vm.Article = response.data.data;
+          for(let i=0;i<vm.Article.length;i++){
+            vm.Article[i].image= "url("+vm.Article[i].image+")";
+          }
+          console.log(vm.Article);
         })
         .catch(function (error) {
           console.log(error)

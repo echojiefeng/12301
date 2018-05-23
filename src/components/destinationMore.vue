@@ -4,14 +4,17 @@
     <div class="searchBox">
       <div class="search"><img src="../assets/home/icon_searchBar_search.png"><input type="text" placeholder="搜一搜"></div>
     </div>
-    <div class="item">
-      <div class="img"></div>
+
+    <div class="item" v-for="(value, index) in listData" :key = "index" @click="goDetail(value.id,value.image,value.title,value.tab,value.abstract,value.ticket,value.address)">
+      <div class="img" :style="{ 'background-image' : value.image }"></div>
       <div class="txt">
-        <div class="title">三亚千古情景区</div>
-        <div>海南省三亚市迎宾路333号</div>
+        <div class="title">{{value.title}}</div>
+        <div>{{value.address}}</div>
         <div class="star"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"></div>
       </div>
     </div>
+
+
     <div class="blankSpace"></div>
   </div>
 </template>
@@ -21,22 +24,41 @@
   export default {
 //  name: 'main',
     created () {
-      this.test()
+      this.getList()
     },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        listData: []
       }
     },
     methods: {
-      test(){
-        req.get('mock')
+      getList(){
+        let vm = this;
+        req.get('/product', {params: {
+          type: this.$route.query.type
+        }})
           .then(function (response) {
-            console.log(response.data);
+            vm.listData = response.data.data;
+            for(let i=0;i<vm.listData.length;i++){
+              vm.listData[i].image= "url("+vm.listData[i].image+")";
+            }
+            console.log(vm.listData);
           })
           .catch(function (error) {
             console.log(error)
           })
+      },
+      goDetail(val1,val2,val3,val4,val5,val6,val7,){
+        this.$router.push({path: '/destinationDetail',query:{
+          id: val1,
+          image: val2,
+          title: val3,
+          tab: val4,
+          abstract: val5,
+          ticket: val6,
+          address: val7,
+        }});
       }
     }
   }

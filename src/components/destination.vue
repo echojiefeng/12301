@@ -10,20 +10,20 @@
         <p>景点推荐</p>
       </div>
       <div class="right">
-        <a>
+        <a @click="goDetail('景点推荐')">
           <span>更多</span><img src="../assets/home/icon_arrow_more.png">
         </a>
       </div>
     </div>
     <div class="itemT">
       <div class="itemTBody">
-        <div class="itemTImg"><p>南山寺</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : SceneryData[0].image }"><p>{{SceneryData[0].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>蜈支洲岛</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : SceneryData[1].image }"><p>{{SceneryData[1].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>三亚千古情</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : SceneryData[2].image }"><p>{{SceneryData[2].title}}</p></div>
       </div>
     </div>
     <!--酒店推荐-->
@@ -32,20 +32,20 @@
         <p>酒店推荐</p>
       </div>
       <div class="right">
-        <a>
+        <a @click="goDetail('酒店推荐')">
           <span>更多</span><img src="../assets/home/icon_arrow_more.png">
         </a>
       </div>
     </div>
     <div class="itemT">
       <div class="itemTBody">
-        <div class="itemTImg"><p>三亚湾酒店</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : HotelData[0].image }"><p>{{HotelData[0].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>凤凰岛</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : HotelData[1].image }"><p>{{HotelData[1].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>凤凰岛</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : HotelData[2].image }"><p>{{HotelData[2].title}}</p></div>
       </div>
     </div>
     <!--餐厅推荐-->
@@ -54,20 +54,20 @@
         <p>餐厅推荐</p>
       </div>
       <div class="right">
-        <a>
+        <a @click="goDetail('餐厅推荐')">
           <span>更多</span><img src="../assets/home/icon_arrow_more.png">
         </a>
       </div>
     </div>
     <div class="itemT">
       <div class="itemTBody">
-        <div class="itemTImg"><p>容三亚餐厅美食推荐</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : RestaurantData[0].image }"><p>{{RestaurantData[0].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>三亚湾酒店</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : RestaurantData[1].image }"><p>{{RestaurantData[1].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>三亚千古情</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : RestaurantData[2].image }"><p>{{RestaurantData[2].title}}</p></div>
       </div>
     </div>
     <!--购物推荐-->
@@ -76,20 +76,20 @@
         <p>购物推荐</p>
       </div>
       <div class="right">
-        <a>
+        <a @click="goDetail('购物推荐')">
           <span>更多</span><img src="../assets/home/icon_arrow_more.png">
         </a>
       </div>
     </div>
     <div class="itemT">
       <div class="itemTBody">
-        <div class="itemTImg"><p>三亚海棠湾国际购物中心</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : ShoppingData[0].image }"><p>{{ShoppingData[0].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>购物中心</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : ShoppingData[1].image }"><p>{{ShoppingData[1].title}}</p></div>
       </div>
       <div class="itemTBody">
-        <div class="itemTImg"><p>购物中心</p></div>
+        <div class="itemTImg" :style="{ 'background-image' : ShoppingData[2].image }"><p>{{ShoppingData[2].title}}</p></div>
       </div>
     </div>
     <div class="blankSpace"></div>
@@ -101,22 +101,135 @@
   export default {
 //  name: 'main',
     created () {
-      this.test()
+      this.Scenery();
+      this.getHotel();
+      this.getRestaurant();
+      this.getShopping();
     },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        SceneryData: [
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          }
+        ],
+        RestaurantData: [
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          }
+        ],
+        HotelData: [
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          }
+        ],
+        ShoppingData: [
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          },
+          {
+            title:'暂无',
+            image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg"
+          }
+        ]
       }
     },
     methods: {
-      test(){
-        req.get('mock')
+      Scenery(){
+        let vm = this;
+        req.get('/product', {params: {
+          type: '景点推荐'
+        }})
           .then(function (response) {
-            console.log(response.data);
+            vm.SceneryData = response.data.data;
+            for(let i=0;i<vm.SceneryData.length;i++){
+              vm.SceneryData[i].image= "url("+vm.SceneryData[i].image+")";
+            }
           })
           .catch(function (error) {
             console.log(error)
           })
+      },
+      getHotel(){
+        let vm = this;
+        req.get('/product', {params: {
+          type: '酒店推荐'
+        }})
+          .then(function (response) {
+            vm.HotelData = response.data.data;
+            for(let i=0;i<vm.HotelData.length;i++){
+              vm.HotelData[i].image= "url("+vm.HotelData[i].image+")";
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getRestaurant(){
+        let vm = this;
+        req.get('/product', {params: {
+          type: '餐厅推荐'
+        }})
+          .then(function (response) {
+            vm.RestaurantData = response.data.data;
+            for(let i=0;i<vm.RestaurantData.length;i++){
+              vm.RestaurantData[i].image= "url("+vm.RestaurantData[i].image+")";
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getShopping(){
+        let vm = this;
+        req.get('/product', {params: {
+          type: '购物推荐'
+        }})
+          .then(function (response) {
+            vm.ShoppingData = response.data.data;
+            for(let i=0;i<vm.ShoppingData.length;i++){
+              vm.ShoppingData[i].image= "url("+vm.ShoppingData[i].image+")";
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      goDetail(val){
+        this.$router.push({path: '/destinationMore',query: {type: val}})
       }
     }
   }

@@ -2,15 +2,15 @@
   <!--目的地更多-->
   <div class="main">
     <div class="headBox">
-      <div class="title"><img src="../assets/home/icon_arrow_back.png"><div>目的地详情</div></div>
+      <div class="title"><img @click="goback()" src="../assets/home/icon_arrow_back.png"><div>目的地详情</div></div>
     </div>
     <div class="card">
-      <div class="img"></div>
-      <div class="title">三亚千古情景区</div>
+      <div class="img" :style="{ 'background-image' : image }"></div>
+      <div class="title">{{title}}</div>
       <div class="star">
         <img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><img src="../assets/home/icon_evaluation_star_shine.png"><span>（查看230条点评）</span>
       </div>
-      <div class="label"><span>千古情</span><span>三亚</span><span>三亚</span></div>
+      <div class="label"><span v-for="(value, index) in tab" :key = "index">{{value[index]}}</span></div>
     </div>
     <!--基础信息-->
     <div class="itemTitle space">
@@ -21,19 +21,19 @@
       </div>
     </div>
     <div class="message">
-      <div class="introduce">三亚千古情景区掩映在茂密的原始森林和鲜花丛中，有大型歌舞《三亚千古情》、南海女神广场、图腾大道、崖州古城爱情谷、科技游乐馆、黎村、苗寨、清明上河图，...</div>
+      <div class="introduce">{{abstract}}</div>
       <div class="ticket">
         <div class="title">门票</div>
-        <div class="content">贵宾成人门市价280元/人，网络销售价250元/人。豪华席580元/人。</div>
+        <div class="content">{{ticket}}</div>
       </div>
       <div class="ticket">
         <div class="title">地址</div>
-        <div class="content">海南省三亚市迎宾路333号</div>
+        <div class="content">{{address}}</div>
       </div>
       <div></div>
     </div>
     <!--旅行商城-->
-    <div class="itemTitle">
+    <div class="itemTitle" style="display: none">
       <div class="left">
         <p>旅行商城</p>
       </div>
@@ -43,7 +43,7 @@
         </a>
       </div>
     </div>
-    <div class="shop">
+    <div class="shop" style="display: none">
       <div class="img"></div>
       <div class="txt">
         <div class="title">三亚3天2夜纯玩套餐</div>
@@ -66,13 +66,13 @@
     </div>
     <div class="comment">
       <div class="title">
-        <div class="img"></div>
+        <div class="img" :style="{ 'background-image' : detailData[0].user_image?detailData[0].user_image: 'url(http://12301.sy.hn//uploads/20180521/3162786f053985ae772da5ac1eb68889.jpg)'}"></div>
         <div class="txt">
-          <div class="left">海外游客</div>
-          <div class="right">2018年4月15日</div>
+          <div class="left">{{detailData[0].user_name?detailData[0].user_name:'暂无'}}</div>
+          <div class="right">{{detailData[0].time?detailData[0].time:'2018-06-10 11:16:22'}}</div>
         </div>
       </div>
-      <div class="content">千古情景区是来三亚必到的经典景区。同天涯海角一样，来到三亚不去三亚千古情景区也会遗憾的！整个景区叫三亚宋城旅游区，里面包含四个景区：三亚千古情景区、三亚宋...</div>
+      <div class="content">{{detailData[0].abstract?detailData[0].abstract:'暂无'}}</div>
     </div>
     <!--相关游记-->
     <div class="itemTitle">
@@ -102,22 +102,46 @@
   export default {
 //  name: 'main',
     created () {
-      this.test()
+      this.getDetail()
     },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        image: this.$route.query.image,
+        title: this.$route.query.title,
+        tab: this.$route.query.tab,
+        abstract: this.$route.query.abstract,
+        ticket: this.$route.query.ticket,
+        address: this.$route.query.address,
+        detailData: [
+          {
+            user_image:null,
+            user_name:null,
+            time:null,
+            abstract:null,
+          }
+        ]
       }
     },
     methods: {
-      test(){
-        req.get('mock')
+      getDetail(){
+        let vm = this;
+        req.get('/assess', {params: {
+          id: this.$route.query.id
+        }})
           .then(function (response) {
-            console.log(response.data);
+            vm.detailData = response.data.data;
+            for(let i=0;i<vm.detailData.length;i++){
+              vm.detailData[i].user_image= "url("+vm.detailData[i].user_image+")";
+            }
+            console.log(vm.detailData);
           })
           .catch(function (error) {
             console.log(error)
           })
+      },
+      goback(){
+        this.$router.push({path: '/destinationMore'});
       }
     }
   }
