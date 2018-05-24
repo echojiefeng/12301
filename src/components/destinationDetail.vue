@@ -271,6 +271,7 @@
         font-size:.24rem;
         font-family:PingFangSC-Regular;
         color:rgba(153,153,153,1);
+        text-align: left;
       }
       .ticket{
         display: flex;
@@ -280,8 +281,10 @@
           font-family:PingFangSC-Regular;
           color:rgba(51,51,51,1);
           width: 1rem;
+          text-align: left;
         }
         .content{
+          font-size:.28rem;
           margin-top: .3rem;
           flex:1;
           text-align: left;
