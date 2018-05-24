@@ -9,9 +9,6 @@
           <p>精选专题</p>
         </div>
         <div class="right">
-          <a>
-            <span>更多</span><img src="../assets/home/icon_arrow_more.png">
-          </a>
         </div>
       </div>
       <div class="itemT">
@@ -30,11 +27,11 @@
       </div>
       <!--分类-->
       <div class="tabbar">
-        <div class="item">全部</div>
-        <div class="item" @click="getStrategy(1)">游记</div>
-        <div class="item" @click="getStrategy(2)">商城</div>
-        <div class="item" @click="getStrategy(3)">问答</div>
-        <div class="item" @click="getStrategy(4)">干货</div>
+        <div class="item" :class="{ active: isActive('0') }" @click="getStrategy(0)">全部</div>
+        <div class="item" :class="{ active: isActive('1') }" @click="getStrategy(1)">游记</div>
+        <div class="item" :class="{ active: isActive('2') }" @click="getStrategy(2)">商城</div>
+        <div class="item" :class="{ active: isActive('3') }" @click="getStrategy(3)">问答</div>
+        <div class="item" :class="{ active: isActive('4') }" @click="getStrategy(4)">干货</div>
       </div>
       <div class="itemO">
         <div class="img" :style="{ 'background-image' : Article[0].image}"></div>
@@ -44,14 +41,14 @@
         </div>
       </div>
       <!--限时立减-->
-      <div class="itemTitle">
+      <div class="itemTitle" style="display: none">
         <div class="left">
           <p>限时立减</p>
         </div>
         <div class="right">
         </div>
       </div>
-      <div class="itemTwo">
+      <div class="itemTwo" style="display: none">
         <div class="item">
           <div class="img"></div>
           <div class="txt">
@@ -78,11 +75,12 @@ export default {
   created () {
     this.getBanner();
     this.goodChose();
-    this.getStrategy(1)
+    this.getStrategy(0)
   },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      activeTab:'0',
       banner: '',
       goodData: [
         {
@@ -108,6 +106,9 @@ export default {
     }
   },
   methods: {
+    isActive (tabIndex) {
+      return tabIndex == this.activeTab
+    },
     getBanner(){
 //      req.get('mock')
       let vm = this;
@@ -134,6 +135,10 @@ export default {
     },
     getStrategy(val){
       let vm = this;
+      this.activeTab =val;
+      if(val==0){
+        val = 1
+      }
       req.get('/travel', {params: {
         type: val
       }})
@@ -156,6 +161,10 @@ export default {
 <style scoped lang="less">
     .main{
       background-color: #f5f5f5;
+      .active{
+        color:rgba(0,128,255,1) !important;
+        border-bottom: .04rem solid #0080ff;
+      }
       .blankSpace{
         height: 1.05rem;
       }
@@ -281,6 +290,7 @@ export default {
           border-radius: 0.08rem 0.08rem 0 0;
         }
         .txt{
+          text-align: left;
           padding: .3rem .4rem .44rem .4rem;
           font-size:.24rem;
           font-family:PingFangSC-Regular;
