@@ -1,50 +1,6 @@
 <template>
   <!--推荐主页-->
   <div class="main">
-    <div class="slide">
-      <div class="slideshow" @mouseover="stop()" @mouseout="move()">
-        <!--<ul>-->
-          <transition-group tag="ul" name="image">
-            <li v-for="(img, index) in imgArray" v-show="index===mark" :key="index">
-              <a href="#">
-                <img :src='img'>
-              </a>
-            </li>
-          </transition-group>
-        <!--</ul>-->
-      </div>
-      <div class="bar">
-        <!--<span></span>-->
-        <!--<span v-for="(item, index) in imgArray" :key="index"></span>-->
-      </div>
-    </div>
-    <!--<div class="topimg" :style="{ 'background-image' : banner }"></div>-->
-      <div class="search"><img src="../assets/home/icon_searchBar_search.png"><input type="text" placeholder="搜一搜"></div>
-      <!--精选专题-->
-      <div class="itemTitle">
-        <div class="left">
-          <p>精选专题</p>
-        </div>
-        <div class="right">
-          <a @click="goMore">
-            <span>更多</span><img src="../assets/home/icon_arrow_more.png">
-          </a>
-        </div>
-      </div>
-      <div class="itemT">
-        <div class="itemTBody" @click="goChoiceDetail(goodData[0].id)">
-          <div class="itemTImg" :style="{ 'background-image' : goodData[0].image}"><p>{{goodData[0].name}}</p></div>
-          <p class="itemTxt">{{goodData[0].title}}</p>
-        </div>
-        <div class="itemTBody" @click="goChoiceDetail(goodData[1].id)">
-          <div class="itemTImg" :style="{ 'background-image' : goodData[1].image}"><p>{{goodData[1].name}}</p></div>
-          <p class="itemTxt">{{goodData[1].title}}</p>
-        </div>
-        <div class="itemTBody" @click="goChoiceDetail(goodData[2].id)">
-          <div class="itemTImg" :style="{ 'background-image' : goodData[2].image}"><p>{{goodData[2].name}}</p></div>
-          <p class="itemTxt">{{goodData[2].title}}</p>
-        </div>
-      </div>
       <!--分类-->
       <div class="tabbar">
         <div class="item" :class="{ active: isActive('0') }" @click="getStrategy(0)">全部</div>
@@ -60,30 +16,6 @@
           <p>{{value.abstract}}</p>
         </div>
       </div>
-      <!--限时立减-->
-      <div class="itemTitle" style="display: none">
-        <div class="left">
-          <p>限时立减</p>
-        </div>
-        <div class="right">
-        </div>
-      </div>
-      <div class="itemTwo" style="display: none">
-        <div class="item">
-          <div class="img"></div>
-          <div class="txt">
-            <p>三亚3天2夜纯玩套餐</p>
-            <span>¥999</span><span>.00</span>
-          </div>
-        </div>
-        <div class="item">
-          <div class="img"></div>
-          <div class="txt">
-            <p>三亚3天2夜纯玩套餐</p>
-            <span>¥999</span><span>.00</span>
-          </div>
-        </div>
-      </div>
     <div class="blankSpace"></div>
   </div>
 </template>
@@ -93,42 +25,31 @@
 export default {
 //  name: 'main',
   created () {
-    this.getBanner();
-    this.goodChose();
-    this.getStrategy(0);
-    this.play()
+    this.getStrategy(0)
   },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       activeTab:'0',
       banner: '',
-      bannerNum: 1,
-      timer: null, //定时器
-      mark: 0, //比对图片索引的变量
-      imgArray: [
-        'http://12301.sy.hn/uploads/20180525/6b078a4b40f24a6753a5d1e253353850.jpg',
-        'http://12301.sy.hn/uploads/20180525/84bc48581bc3d1a5da59ad2a42e0060e.jpg',
-        'http://12301.sy.hn/uploads/20180525/5487fe221fb7428d80dbadff9d91d405.png'
-      ],
       goodData: [
         {
           image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
-          title:"暂无",
-          id:-1,
-          name:'暂无'
+          title:"测试",
+          id:1,
+          name:'测试2'
         },
         {
           image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
-          title:"暂无",
-          id:-1,
-          name:'暂无'
+          title:"测试",
+          id:1,
+          name:'测试2'
         },
         {
           image:"http://12301.sy.hn//uploads/20180522/c3458e485048455af54befb779fdab22.jpg",
-          title:"暂无",
-          id:-1,
-          name:'暂无'
+          title:"测试",
+          id:1,
+          name:'测试2'
         },
       ],
       Article: [
@@ -141,34 +62,8 @@ export default {
     }
   },
   methods: {
-    //轮播图开始
-    autoPlay () {
-      this.mark++;
-      if (this.mark === this.bannerNum) { //当遍历到最后一张图片置零
-        this.mark = 0
-      }
-    },
-    play () {
-//      setInterval(this.autoPlay, 2500)
-      this.timer = setInterval(this.autoPlay, 2500)
-    },
-    change (i) {
-      this.mark = i
-    },
-    stop () {
-      clearInterval(this.timer)
-    },
-    move () {
-      this.timer = setInterval(this.autoPlay, 2500)
-    },
-    //轮播图结束
     goTravelDetail(val){
       this.$router.push({path: '/travelsDetail',query: {id: val}})
-    },
-    goChoiceDetail(val){
-      if(val!=-1){
-        this.$router.push({path: '/goodChoiceDetail',query: {id: val}})
-      }
     },
     isActive (tabIndex) {
       return tabIndex == this.activeTab
@@ -182,14 +77,6 @@ export default {
       req.get('/banner')
         .then(function (response) {
           vm.banner = "url("+response.data.data.image+")";
-          console.log('11111111');
-          if(response.data.data){
-            vm.imgArray=[]
-            for(let i=0;i<response.data.data.length;i++){
-              vm.imgArray.push(response.data.data[i].image)
-            }
-            vm.bannerNum=response.data.data.length
-          }
         })
         .catch(function (error) {
           console.log(error)
@@ -200,13 +87,13 @@ export default {
       req.get('/select_title')
         .then(function (response) {
           if(response.data.data){
-            for(let i=0;i<response.data.number;i++){
+//            for(let i=0;i<vm.goodData.length;i++){
+            for(let i=0;i<1;i++){
                 vm.goodData[i] = response.data.data[i];
                 vm.goodData[i].image= "url("+vm.goodData[i].image+")";
             }
           }
           console.log('精选');
-          console.log(response.data);
           console.log(vm.goodData);
         })
         .catch(function (error) {
@@ -216,7 +103,11 @@ export default {
     getStrategy(val){
       let vm = this;
       this.activeTab =val;
-      req.get('/travel', {params: {
+      if(val==0){
+        val=null
+      }
+      req.get('/travel_link', {params: {
+        product_id: this.$route.query.id,
         type: val
       }})
         .then(function (response) {
@@ -240,22 +131,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-  .image-enter-active {
-    transform: translateX(0);
-    transition: all 1.5s ease;
-  }
-  .image-leave-active {
-    transform: translateX(-100%);
-    transition: all 1.5s ease;
-  }
-  .image-enter {
-    transform: translateX(100%);
-  }
-  .image-leave {
-    transform: translateX(0);
-  }
-  .main{
+    .main{
       background-color: #f5f5f5;
+      height: 100vh;
       .slide{
         /*width: 1024px;*/
         height: 3.98rem;
@@ -368,14 +246,14 @@ export default {
         }
       }
       .itemT{
-        margin: .3rem .1rem 0 .3rem;
+        margin: .3rem .3rem 0 .3rem;
         display: flex;
         .itemTBody{
           flex: 1;
           .itemTImg{
             color: #fff;
-            width: 2.1rem;
-            line-height: 2.1rem;
+            width: 2rem;
+            line-height: 2rem;
             font-size: .3rem;
             font-family:PingFangSC-Regular;
             background-image: url('../assets/sample/img_recommend_subject1.png');
@@ -384,8 +262,8 @@ export default {
             background-size: cover;
             border-radius: 8px;
             P{
-              height: 2.1rem;
-              width: 2.1rem;
+              height: 2rem;
+              width: 2rem;
               background-color: rgba(0,0,0,0.2);
               border-radius: 8px
             }

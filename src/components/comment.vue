@@ -1,99 +1,20 @@
 <template>
   <!--目的地更多-->
   <div class="main">
-    <div class="headBox">
+    <div class="comment" v-for="(value, index) in detailData" :key = "index">
       <div class="title">
-        <!--<img @click="goback()" src="../assets/home/icon_arrow_back.png">-->
-        <div>目的地详情</div></div>
-    </div>
-    <div class="card">
-      <div class="img" :style="{ 'background-image' : image }"></div>
-      <div class="title">{{title}}</div>
-      <div class="star">
-        <img src="../assets/home/icon_evaluation_star_shine.png" v-for="n in stars"><img  src="../assets/home/icon_evaluation_star_normal.png" v-for="n in 5-stars"><span @click="goComment">（查看{{comment}}条点评）</span>
-      </div>
-      <div class="label"><span v-for="(value, index) in tab" :key = "index">{{value[index]}}</span></div>
-    </div>
-    <!--基础信息-->
-    <div class="itemTitle space">
-      <div class="left">
-        <p>基础信息</p>
-      </div>
-      <div class="right">
-      </div>
-    </div>
-    <div class="message">
-      <div class="introduce">{{abstract}}<span @click="showDetail" v-if="showFlag">[展开]</span><span v-if="!showFlag" @click="showDetail">[收起]</span></div>
-      <div class="ticket">
-        <div class="title">门票</div>
-        <div class="content">{{ticket}}</div>
-      </div>
-      <div class="ticket">
-        <div class="title">地址</div>
-        <div class="content">{{address}}</div>
-      </div>
-      <div></div>
-    </div>
-    <!--旅行商城-->
-    <div class="itemTitle" style="display: none">
-      <div class="left">
-        <p>旅行商城</p>
-      </div>
-      <div class="right">
-        <a>
-          <span>查看更多折扣</span><img src="../assets/home/icon_arrow_more.png">
-        </a>
-      </div>
-    </div>
-    <div class="shop" style="display: none">
-      <div class="img"></div>
-      <div class="txt">
-        <div class="title">三亚3天2夜纯玩套餐</div>
-        <div class="price">
-          <div class="left">¥999.00</div>
-          <div class="right">已售2011件</div>
-        </div>
-      </div>
-    </div>
-    <!--点评-->
-    <div class="itemTitle">
-      <div class="left">
-        <p>点评</p>
-      </div>
-      <div class="right" @click="goComment">
-        <a>
-          <span>查看全部点评（共{{comment}}条）</span><img src="../assets/home/icon_arrow_more.png">
-        </a>
-      </div>
-    </div>
-    <div class="comment">
-      <div class="title">
-        <div class="img" :style="{ 'background-image' : detailData[0].user_image?detailData[0].user_image: 'url(http://12301.sy.hn//uploads/20180521/3162786f053985ae772da5ac1eb68889.jpg)'}"></div>
+        <div class="img" :style="{ 'background-image' : value.user_image?value.user_image: 'url(http://12301.sy.hn//uploads/20180521/3162786f053985ae772da5ac1eb68889.jpg)'}"></div>
         <div class="txt">
-          <div class="left">{{detailData[0].user_name?detailData[0].user_name:'暂无'}}</div>
-          <div class="right">{{detailData[0].time?detailData[0].time:'2018-06-10 11:16:22'}}</div>
+          <div class="left">
+            {{value.user_name?value.user_name:'暂无'}}
+            <div class="star">
+              <img src="../assets/home/icon_evaluation_star_shine.png" v-for="n in value.stars"><img  src="../assets/home/icon_evaluation_star_normal.png" v-for="n in value.unstars">
+            </div>
+          </div>
+          <div class="right">{{value.time?value.time:'2018-06-10 11:16:22'}}</div>
         </div>
       </div>
-      <div class="content">{{detailData[0].abstract?detailData[0].abstract:'暂无'}}</div>
-    </div>
-    <!--相关游记-->
-    <div class="itemTitle">
-      <div class="left">
-        <p>相关游记</p>
-      </div>
-      <div class="right" @click="goTravelDetail">
-        <a>
-          <span>搜索更多相关游记</span><img src="../assets/home/icon_arrow_more.png">
-        </a>
-      </div>
-    </div>
-    <div class="travels" @click="goTravel(travelData[0].id)">
-      <div class="title">{{travelData[0].title}}</div>
-      <div class="content">{{travelData[0].abstract}}</div>
-      <div class="user">
-        <div class="img" :style="{ 'background-image' : travelData[0].user_image }" ></div>
-        <div class="name">{{travelData[0].user_name}}</div>
-      </div>
+      <div class="content">{{value.abstract?value.abstract:'暂无'}}</div>
     </div>
     <div class="blankSpace"></div>
   </div>
@@ -105,110 +26,45 @@
 //  name: 'main',
     created () {
       this.getDetail()
-      this.initData()
-      this.getTravel()
     },
     data () {
       return {
         showFlag: true,
-        msg: 'Welcome to Your Vue.js App',
-        image: this.$route.query.image,
-        title: this.$route.query.title,
-        tab: this.$route.query.tab,
-        abstract: this.$route.query.abstract,
-        tmpAbstract:'',
-        ticket: this.$route.query.ticket,
-        address: this.$route.query.address,
-        stars: this.$route.query.stars,
-        comment: 23,
         detailData: [
           {
             user_image:'',
             user_name:'',
             time:'',
-            abstract:''
-          }
-        ],
-        travelData:[
-          {
-            abstract: '暂无',
-            id: -1,
-            title:'',
-            user_name:'',
-            user_image:'',
+            abstract:'',
+            stars:5,
+            unstars:0
           }
         ]
       }
     },
-      methods: {
-      goTravelDetail(){
-        this.$router.push({path: '/travelsList',query: {id: this.$route.query.id}})
-      },
-      goComment(){
-        this.$router.push({path: '/comment',query: {id: this.$route.query.id}})
-      },
-      goTravel(val){
-        this.$router.push({path: '/travelsDetail',query: {id: val}})
-      },
-      getTravel(){
-        let vm = this;
-        req.get('/travel_link', {params: {
-          product_id: 48
-        }})
-          .then(function (response) {
-            if(response.data.number!=0){
-              if(response.data.data){
-                vm.travelData = response.data.data;
-                for(let i=0;i<vm.travelData.length;i++){
-                  vm.travelData[i].user_image= "url("+vm.travelData[i].user_image+")";
-                }
-              }
-            }
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      },
-      initData(){
-        if(this.abstract.length>50){
-          this.tmpAbstract = this.abstract.substr(45)
-          this.abstract = this.abstract.substr(0,45)
-        }
-      },
+    methods: {
       getDetail(){
         let vm = this;
         req.get('/assess', {params: {
           id: this.$route.query.id
         }})
           .then(function (response) {
-            if(response.data.number==0){
-              vm.comment=0
-            } else {
-              vm.comment=response.data.number
-              if(response.data.data){
-                vm.detailData = response.data.data;
-                for(let i=0;i<vm.detailData.length;i++){
-                  vm.detailData[i].user_image= "url("+vm.detailData[i].user_image+")";
-                }
+            console.log(response.data);
+            if(response.data.data){
+              vm.detailData = response.data.data;
+              for(let i=0;i<vm.detailData.length;i++){
+                vm.detailData[i].user_image= "url("+vm.detailData[i].user_image+")";
+                vm.detailData[i].unstars= 5-vm.detailData[i].stars;
               }
             }
+            console.log('------');
             console.log(vm.detailData)
+            console.log('------');
           })
           .catch(function (error) {
             console.log(error)
           })
       },
-      goback(){
-        this.$router.push({path: '/destinationMore'});
-      },
-      showDetail(){
-        this.showFlag=!this.showFlag
-        if(this.showFlag){
-          this.initData()
-        } else {
-          this.abstract = this.abstract+this.tmpAbstract
-        }
-      }
     }
   }
 </script>
@@ -428,16 +284,24 @@
         .txt{
           flex: 1;
           display: flex;
-          line-height: .68rem;
           .left{
+            line-height: .46rem;
             margin-left: .26rem;
             flex: 1;
             text-align: left;
             font-size:.28rem;
             font-family:PingFangSC-Regular;
             color:rgba(51,51,51,1);
+            .star{
+              height: .22rem;
+              img{
+                width:.22rem;
+                height:.22rem;
+              }
+            }
           }
           .right{
+            line-height: .68rem;
             flex: 1;
             text-align: right;
           }

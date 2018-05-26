@@ -41,11 +41,11 @@ export default{
       display: block;
       margin-top: 0.02rem;
       font-size: 0.2rem;
-      color:#999;
+      color:#0080FF;
     }
     &.is-active{
       .m-tabbar-item-text{
-        color: #24BFF2;
+        color: #0080FF;
       }
     }
 

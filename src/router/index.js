@@ -6,6 +6,11 @@ import main from '@/components/main'
 import destination from '@/components/Destination'
 import destinationDetail from '@/components/destinationDetail'
 import destinationMore from '@/components/destinationMore'
+import goodChoiceList from '@/components/goodChoiceList'
+import goodChoiceDetail from '@/components/goodChoiceDetail'
+import comment from '@/components/comment'
+import travelsDetail from '@/components/travelsDetail'
+import travelsList from '@/components/travelsList'
 
 Vue.use(Router)
 
@@ -35,6 +40,31 @@ export default new Router({
       path: '/destinationMore',
       name: 'destinationMore',
       component: destinationMore
-    }
+    },
+    {
+      path: '/goodChoiceList',
+      name: 'goodChoiceList',
+      component: goodChoiceList
+    },
+    {
+      path: '/goodChoiceDetail',
+      name: 'goodChoiceDetail',
+      component: goodChoiceDetail
+    },
+    {
+      path: '/comment',
+      name: 'comment',
+      component: comment
+    },
+    {
+      path: '/travelsDetail',
+      name: 'travelsDetail',
+      component: travelsDetail
+    },
+    {
+      path: '/travelsList',
+      name: 'travelsList',
+      component: travelsList
+    },
   ]
 })
